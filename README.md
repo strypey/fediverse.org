@@ -1,6 +1,13 @@
 # Fediverse.org
 The Fediverse.org an is attemp to map all public nodes that are part of the GNU Social Fediverse as a way to contribute to the grow of the community, by offering a neutral starting point to newcommers, while being a knowledge-base for admins & users. 
-<br /><br />
+
+<h2>Important</h2>
+<br />
+In order for this to work you need to add the MaxiMind sqlite database I created, to the path ./data/dbs/. This is a file to geo localize node's IP addresses. 
+Unfortunately its > 100MB and Github thinks its an ugly file. Shame on it!
+
+<h2>How it works</h2>
+<br />
 Fediverse.org works simple. 
 <br />
 There is frontend part which includes a pre-craweled table of the main nodes that are part of the !frediverse, among other things, like handling the page, new nodes submission, etc.
