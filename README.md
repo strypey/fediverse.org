@@ -5,6 +5,11 @@ The Fediverse.org an is attemp to map all public nodes that are part of the GNU 
 <br />
 In order for this to work you need to add the MaxiMind sqlite database I created, to the path ./data/dbs/. This is a file to geo localize node's IP addresses. 
 Unfortunately its > 100MB and Github thinks its an ugly file. Shame on it!
+<br />
+Here is the DB: https://mega.nz/#!oEoTAQKa!82TEvs1XP-BFF_Rplqhw09DGnWJ7xkGch0mtd2C3FMQ
+<br />
+For the sake of merits. The data of this database was obtained from <a href="https://www.maxmind.com/en/home">MaxMind</a>.
+
 
 <h2>How it works</h2>
 <br />
