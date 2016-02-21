@@ -7,7 +7,7 @@ In order for this to work you need to add the MaxiMind sqlite database I created
 Unfortunately its > 100MB and Github thinks its an ugly file. Shame on it!
 <br />
 Here is the DB: https://mega.nz/#!oEoTAQKa!82TEvs1XP-BFF_Rplqhw09DGnWJ7xkGch0mtd2C3FMQ
-<br />
+<br /><br />
 For the sake of merits. The data of this database was obtained from <a href="https://www.maxmind.com/en/home">MaxMind</a>.
 
 
@@ -16,8 +16,7 @@ For the sake of merits. The data of this database was obtained from <a href="htt
 Fediverse.org works simple. 
 <br />
 There is frontend part which includes a pre-craweled table of the main nodes that are part of the !frediverse, among other things, like handling the page, new nodes submission, etc.
-
-<br /><br />
+<br />
 This table of nodes is generated every 15 minutes by the parser, which is executed via cronjob by the ./fediadmin.php file. 
 <br />
 This parser generates an .html table with all nodes and updates the sqlite database where all the information is stored.
