@@ -1,33 +1,44 @@
-# Fediverse.org
-The Fediverse.org an is attemp to map all public nodes that are part of the GNU Social Fediverse as a way to contribute to the grow of the community, by offering a neutral starting point to newcommers, while being a knowledge-base for admins & users. 
-
-<h2>Important</h2>
-<br />
-In order for this to work you need to add the MaxiMind sqlite database I created, to the path ./data/dbs/. This is a file to geo localize node's IP addresses. 
-Unfortunately its > 100MB and Github thinks its an ugly file. Shame on it!
-<br />
-Here is the DB: https://mega.nz/#!oEoTAQKa!82TEvs1XP-BFF_Rplqhw09DGnWJ7xkGch0mtd2C3FMQ
-<br /><br />
-For the sake of merits. The data of this database was obtained from <a href="https://www.maxmind.com/en/home">MaxMind</a>.
-
-
-<h2>How it works</h2>
-<br />
-Fediverse.org works simple. 
-<br />
-There is frontend part which includes a pre-craweled table of the main nodes that are part of the !frediverse, among other things, like handling the page, new nodes submission, etc.
-<br />
-This table of nodes is generated every 15 minutes by the parser, which is executed via cronjob by the ./fediadmin.php file. 
-<br />
-This parser generates an .html table with all nodes and updates the sqlite database where all the information is stored.
-<br />
-This ./fediadmin.php file also includes other methods like "generate-table" which generates the .html table shown in the frontend but without crawling all nodes for new information.
-<br />
-This ./fediadmin.php can be executed via command line (it is recommended), unfortunately the server where the site is stored doesn't allow commands in my cronjobs so I am crawling via a simple wget.
-<br /><br />
-More information can be found at <a href="http://www.fediverse.org/">fediverse.org</a>. Later I promise to make a more useful README file here on Github. 
-<br /><br />
-This is a community, non-profit project. Feel free to collaborate or donate if you want to contribute with the server.
-
-<h2>TODO</h2>
-Please visit the site: <a href="http://www.fediverse.org/to-do">http://www.fediverse.org/to-do</a>
++Fediverse.org
+ +=============
+ +
+ +Fediverse.org is an attempt to map all public nodes that are part of the GNU
+ +social Fediverse, in order to contribute to the growth of the community. We
+ +offer a neutral starting point for newcomers, while also being a knowledge base
+ +for admins and existing users.
+ +
+ +Important information
+ +---------------------
+ +
+ +In order for this to work, you need to add
+ +[this GeoIP database](https://mega.nz/#!oEoTAQKa!82TEvs1XP-BFF_Rplqhw09DGnWJ7xkGch0mtd2C3FMQ)
+ +I created in the `./data/dbs/` directory. Unfortunately, it's more than 100 MB
+ +and GitHub thinks it's an ugly file. Shame on you, GitHub!
+ +
+ +[MaxMind](https://www.maxmind.com/en/home) originally provided the information
+ +in the database.
+ +
+ +How it works
+ +------------
+ +
+ +It's actually very simple.
+ +
+ +There is frontend part which includes a pre-crawled table of the main nodes
+ +that are part of the !frediverse, among other things, like handling the page,
+ +new nodes submission, etc.
+ +
+ +The database is refreshed every 15 minutes by the parser, which is executed via
+ +cronjob by the `./fediadmin.php`. This parser generates an HTML table with all
+ +nodes and updates the main SQLite database. `./fediadmin.php` also includes
+ +other methods like `generate-table`, which regenerates the HTML table without
+ +crawling all nodes for new information. It can be executed via command line
+ +(which is recommended), but unfortunately the server where the site is
+ +currently hosted doesn't allow commands in my cronjobs, so crawling is done via
+ +a simple wget.
+ +
+ +More information can be found [on the site itself](http://www.fediverse.org/).
+ +I promise to make a more useful README file here on Github later.
+ +
+ +This is a community-supported, non-profit project. Feel free to collaborate or
+ +donate if you want to contribute! Please visit the
+ +[TODO list](http://www.fediverse.org/to-do) of pending tasks and suggestions
+ +for a better idea of how you can contribute.
