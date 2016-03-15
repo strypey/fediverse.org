@@ -85,6 +85,28 @@ function node_up(){
 }
 
 
+
+function onload_recaptcha(){
+    // console.log('recaptcha loaded');
+    // enable add button form button when recaptcha has loaded
+    $("#btn-add-node-modal").prop('disabled', false);
+    grecaptcha.render( "recaptcha-box", { sitekey : '6LevIxkTAAAAALDxcmNLrsJa9kr92CfBlnt7ohuq' });
+
+}
+/* function recaptcha_check(){
+
+   if (typeof grecaptcha != "undefined") {
+   // console.log("RCH OK");
+   }else{
+   $.getScript("https://www.google.com/recaptcha/api.js?onload=onload_recaptcha&render=explicit", function() {
+   // console.log("CAP LOADED");
+   });
+   }
+   
+   
+   } */
+
+
 $(function() {
     /* Ping button handler  */
     $("#btn-check-up").click(function(){
@@ -98,6 +120,8 @@ $(function() {
     $("#frm-add-node" ).submit(function( event ) {
         
         event.preventDefault();
+        $("#btn-add-node-modal").button('loading');
+        
         if ($("#node_url").val().replace(" /gi", "") != ""){
             var data_send = $('#frm-add-node').serialize();
             data_send += "&action=add-node";
@@ -105,7 +129,9 @@ $(function() {
             alert("Please add some url.");
             return;
         }
-        $.ajax({
+
+
+        var xhr_add_node = $.ajax({
             url: './fedixhr.php',
             type: 'post',
             dataType: 'xml',
@@ -116,13 +142,113 @@ $(function() {
                 var result_description = $(xml).find('description').text();
                 if (result_code != "ERROR"){
                     $('#add-node-modal').modal('hide');
+                    $("#node_url").val("");
+                    // reset recaptcha
+                    grecaptcha.reset();                    
                 }
-                $("#node_url").val("");
+                
                 alert(result_description);
                 
             }
         });
+
+        // fail handling
+        xhr_add_node.fail(function( jqXHR, textStatus ) {
+            alert("Something wrong happened with the request :(. Contact the admin: " + textStatus);
+        });
+        // always
+        xhr_add_node.always(function(  ) {
+            $("#btn-add-node-modal").button('reset');
+        });        
+
+
+
+        
     });    
+
+    // tabs
+    $('#fediverse-tabs a').click(function (e) {
+        e.preventDefault()
+            $(this).tab('show');
+    });
+    // map tabs on show: load map
+    $('#fediverse-map-tab').on('shown.bs.tab', function (e) {
+
+        if ( ! $( "#map" ).length ) {
+            // init map
+            $('#fediverse-map-content').append($('<div></div>').attr({ id : "map" })).append("<br>");
+            var mymap = L.map('map').setView([-51.77, -59.38], 13);
+
+        
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidHV4eHVzIiwiYSI6ImNpa3Iyb2xkYjA0OXV1Z2t0aW5qbWlkemgifQ.Fk9jfppyFhcCKp4T2HVrEQ', {
+                maxZoom: 18,
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+		             '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+		             'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                id: 'mapbox.streets'
+            }).addTo(mymap);
+            // mymap.invalidateSize();            
+        }
+
+
+        // create all markers
+        var a_latlongs = new Array();
+        $.each(map_nodes, function( index, node ) {
+
+            if (node.lat && node.lon){
+
+
+                var pinAnchor = new L.Point(23, 47);
+                
+                var marker = L.marker([node.lat, node.lon], {
+                    'icon' : L.icon({
+                        iconUrl: './js/leaflet/images/marker-icon.png',
+                        shadowUrl: './js/leaflet/images/marker-shadow.png',
+                        iconAnchor: pinAnchor,
+                        popupAnchor: L.point(0, 40),
+                        class: 'mapmarker'
+                    })
+                }).addTo(mymap).bindPopup(node.text);
+                // add lat longs for later map center
+                a_latlongs.push( L.latLng(node.lat, node.lon) );                
+            }
+
+        });
+
+
+        // center on all maps
+        var bounds = new L.LatLngBounds(a_latlongs);
+        mymap.fitBounds(bounds);
+        
+        // other map stuffs
+        /* L.marker([51.5, -0.09]).addTo(mymap)
+           .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+
+           L.polygon([
+           [51.509, -0.08],
+           [51.503, -0.06],
+           [51.51, -0.047]
+           ]).addTo(mymap).bindPopup("I am a polygon."); w
+
+        */
+        
+        /* 
+           var popup = L.popup();
+           function onMapClick(e) {
+           console.log(e);
+           popup.setLatLng(e.latlng).setContent('').openOn(mymap);
+           }
+           mymap.on('click', onMapClick); */
+
+        
+    });
+    // datatable
+    $('#fediverse-main-table').DataTable({
+        "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+        "pageLength": 50,
+        "paging": true,
+        "order": [[ 1, "asc" ]]
+    });
 
 
 });

@@ -22,7 +22,11 @@ if (file_exists($header_inc)) require_once($header_inc);
         
         <!-- Fediverse-map custom styles -->
         <link rel="stylesheet" href="/css/fediverse-map.css">
-        
+        <!-- Leaflet -->
+        <link rel="stylesheet" href="/js/leaflet/leaflet.css">
+        <!-- simple favicon  -->
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">        
     </head>
     
     <body>
@@ -38,26 +42,25 @@ if (file_exists($header_inc)) require_once($header_inc);
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="/">
-                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>                        
-                        !FEDIVERSE
+                        <img src="/images/fediverse-logo.png" class="logo-img" style="" />
+                        &nbsp;Fediverse
                     </a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
 
                     <ul class="nav navbar-nav navbar-left">
                         <li <?php echo menu_sel("home", $site_section, true);  ?>><a href="/">Home</a></li>
-                        <li <?php echo menu_sel("about", $site_section, true);  ?>><a href="/about">About</a></li>                        
+                        <li <?php echo menu_sel("about", $site_section, true);  ?>><a href="/about">About</a></li>                                                
+                        <li <?php echo menu_sel("news", $site_section, true);  ?>><a href="/news">News</a></li>
                         <li <?php echo menu_sel("to-do", $site_section, true);  ?>><a href="/to-do">To Do</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">How-Tos <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">How-to-1</a></li>
-                                <li><a href="#">How-to-2</a></li>
-                                <li><a href="#">How-to-3</a></li>
+                                <li><a href="#">How-to-1 (soon)</a></li>
+                                <li><a href="#">How-to-2 (soon)</a></li>
+                                <li><a href="#">How-to-3 (soon)</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">What is GNU Social?</a></li>
-                                <li><a href="#">How GNU Social Works?</a></li>
-                                <li><a href="#">Qvitter = GNU Social?</a></li>
+                                <li><a href="#">General F.A.Q</a></li>
                             </ul>
                         </li>
 
@@ -98,20 +101,25 @@ if (file_exists($header_inc)) require_once($header_inc);
                     <form id="frm-add-node" action="" method="POST">
                         <div class="modal-body">
 
-                            <p>If you are and admin and what to add your node to the list you are very welcome!
-                                For the moment it's a manual add, while I develop the admin interface for this, and a way to auto-validate the input.
+                            <p>
+                                If you are and admin and want to add your node to the list you are very welcome!
+                                <br />
+                                <strong>Make sure your node is up and running. After submitting it may take a while until its added, so be patient.</strong>
                             </p>
                             <p>
-                                So, just share the url of your node and we will more than happy to add it, asap.
+                                This is now an automatic process.
                             </p>
                             <p>
                                 <label for="node_url">Node Url</label>
-                                <input type="url" id="node_url" name="node_url" class="form-control" placeholder="node url...">                            
+                                <input type="url" id="node_url" name="node_url" class="form-control" placeholder="node url (eg. http://quitter.no)...">                            
+                            </p>
+                            <p id="recaptcha-box">
+
                             </p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add node</button>
+                            <button id="btn-add-node-modal" data-loading-text="Adding..."  type="submit" class="btn btn-primary" disabled>Add node</button>
                         </div>
                     </form>
                 </div>
@@ -121,29 +129,9 @@ if (file_exists($header_inc)) require_once($header_inc);
         <!-- Javascript  -->
         <script src="/js/fediverse-libs.js"></script>
         <script src="/js/fediverse.js"></script>
-
-        <script>
-         $(function() {
-             
-             $('#fediverse-tabs a').click(function (e) {
-                 e.preventDefault()
-                     $(this).tab('show')
-             });
-             
-             $('#fediverse-main-table').DataTable({
-                 "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-                 "pageLength": 50,
-                 "paging": true,
-                 "order": [[ 1, "asc" ]]
-             });
-
-             // ping when load
-             $("#btn-check-up").click();
-             
-         });
-         
-
-        </script>        
+        
+        <!-- reCaptcha  -->
+        <script src="https://www.google.com/recaptcha/api.js?onload=onload_recaptcha&render=explicit" async defer></script>
         
     </body>
 </html>

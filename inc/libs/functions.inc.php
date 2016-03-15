@@ -44,4 +44,13 @@ function menu_sel($sec, $param, $with_class=false){
     return $ret;
 }
 
+/* function to take care of url sanitazion  */
+function sanitize_url($url){
+
+    $url = filter_var($url, FILTER_SANITIZE_URL);
+    if ( "/" == substr($url, -1)) $url = substr($url, 0, -1);
+
+    return $url;
+}
+
 ?>

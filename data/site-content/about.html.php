@@ -94,11 +94,20 @@
             <div class="bs-docs-section">
                 <h1 class="page-header" id="licenses">
                     <a data-anchorjs-icon="" aria-label="Anchor link for: the-idea" href="#licenses" class="anchorjs-link " style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>
-                    Licenses
+                    Licenses & so
                 </h1>
                 <p>
-                    This site includes GeoLite data created by MaxMind, available from 
-                    <a href="http://www.maxmind.com">http://www.maxmind.com</a>.
+                    This site includes GeoLite data created by MaxMind, available at 
+                    <a href="http://www.maxmind.com">www.maxmind.com</a>.
+                </p>
+                <p>
+                    Fediverse.org also uses <a href="http://jquery.com/" title="jQuery" rel="nofollow">jQuery</a>, 
+                    <a href="http://leafletjs.com/" title="Leaflet Maps" rel="nofollow">Leaflet.js</a>, 
+                    <a href="https://www.mapbox.com/" title="Mapbox" rel="nofollow">Mapbox</a>,
+                    <a href="https://www.datatables.net/" title="DataTables" rel="nofollow">DataTables</a>
+                    & 
+                    <a href="http://getbootstrap.com/" title="Bootstrap" rel="nofollow">Bootstrap</a>              
+                    
                 </p>
 
             </div>            

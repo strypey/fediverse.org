@@ -32,6 +32,34 @@ class Fedib extends SQLite3{
         $res = $this->querySingle($sql_q);
         return $res;
     }
+
+    /* select the next node it for a possible insert */
+    private function select_next_node_id(){
+        $sql_q = "SELECT (max(node_id)+1) as next_node_id FROM fediverse_nodes";
+        return $this->querySingle($sql_q, true);
+    }
+    
+    public function add_node($node_uri){
+        // check if the url already exists
+        $ret = Array('result'=> false, 'code'=>'ERROR_ADDING');
+        $a_nodes = $this->get_nodes($node_uri);
+        if (!empty($a_nodes)){
+            $ret = Array('result'=> false, 'code'=>'NODE_ALREADY_EXISTS');
+        }else{
+
+            // get next node id
+            $next_id = $this->select_next_node_id();
+            $sql_i = "INSERT INTO fediverse_nodes (node_id, node_uri) VALUES (".$next_id["next_node_id"].", '".$node_uri."')";
+
+            $insert_ret = $this->exec($sql_i);
+            if ( FALSE !== $insert_ret ){
+                $ret = Array('result'=> true, 'code'=>'NODE_ADDED_OK', 'node_id'=>$next_id["next_node_id"]);
+            }
+
+            
+        }
+        return $ret;
+    }
     
     public function get_nodes($node_id=NULL, $get_values="*"){
         
@@ -50,7 +78,7 @@ class Fedib extends SQLite3{
 
         $res = $this->query($sql_q);
         $nodes = Array();
-
+        
         while ($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $nodes[] = $row;
         }

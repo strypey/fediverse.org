@@ -7,6 +7,8 @@
 // fadmin-specific configuration
 set_time_limit(0);
 ini_set('max_execution_time', (60 * 15));
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
 
 // load basic config files
 require_once("inc/fediverse.config.inc.php");

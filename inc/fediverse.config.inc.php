@@ -17,11 +17,12 @@ define("FEDIVERSE_NODES_TABLE", "./data/node-table.html"); // path where to pars
 
 // Stuff related to the admin cli interface
 // token that must be sent via param as an extra security
-define("FEDIVERSE_ADMIN_TOKEN", "###add-whatever-you-want###");
+define("FEDIVERSE_ADMIN_TOKEN", "MANUAL_TOKEN");
 // allowed actions for the admin interface
 $admin_allowed_actions = Array(
     'generate-table',
-    'fediverse-parse'
+    'fediverse-parse',
+    'fediverse-up'
 );
 
 // xhr allowed actions
