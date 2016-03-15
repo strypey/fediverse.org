@@ -24,6 +24,9 @@
                     
                 </p>
 
+                <h3><strong>Mar 15, 2016</strong></h3>
+                <p>Merge Github changes suggested by HectorAE</p>
+
                 <h3><strong>Mar 08, 2016</strong></h3>
                 <p>
                     Starting to work on the map view of the GNU Social Fediverse. <strong>WARNING: </strong> Map view still does *not* work.                    
