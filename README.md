@@ -6,8 +6,7 @@ Fediverse.org
  offer a neutral starting point for newcomers, while also being a knowledge base
  for admins and existing users.
  
- Important information
- ---------------------
+## Important information
  
  In order for this to work, you need to add
  [this GeoIP database](https://mega.nz/#!oEoTAQKa!82TEvs1XP-BFF_Rplqhw09DGnWJ7xkGch0mtd2C3FMQ)
@@ -17,8 +16,7 @@ Fediverse.org
  [MaxMind](https://www.maxmind.com/en/home) originally provided the information
  in the database.
  
- How it works
- ------------
+## How it works
  
  It's actually very simple.
  
